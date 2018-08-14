@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Oriola Public Gatekeeper</title>
+  <title>Gatekeeper Public API</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -696,122 +696,12 @@ margin-bottom: 20px;
   <script>
     // Script section to load models into a JS Var
     var defs = {}
-            defs.Order = {
-  "type" : "object",
-  "properties" : {
-    "id" : {
-      "type" : "integer",
-      "format" : "int64"
-    },
-    "time" : {
-      "type" : "integer",
-      "format" : "int64"
-    },
-    "quantity" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "shipDate" : {
-      "type" : "string",
-      "format" : "date-time"
-    },
-    "status" : {
-      "type" : "string",
-      "description" : "Order Status",
-      "enum" : [ "status1", "status2", "status3" ]
-    },
-    "complete" : {
-      "type" : "boolean",
-      "default" : false
-    }
-  }
-};
-            defs.OrigoProduct = {
-  "type" : "object",
-  "properties" : {
-    "info" : {
-      "$ref" : "#/definitions/OrigoProduct_info"
-    },
-    "stock" : {
-      "$ref" : "#/definitions/OrigoProduct_stock"
-    },
-    "price" : {
-      "$ref" : "#/definitions/OrigoProduct_price"
-    }
-  }
-};
-            defs.OrigoProduct_info = {
-  "properties" : {
-    "number" : {
-      "type" : "string"
-    },
-    "name" : {
-      "type" : "string"
-    },
-    "manufacturer" : {
-      "type" : "string"
-    }
-  }
-};
-            defs.OrigoProduct_price = {
-  "properties" : {
-    "currency" : {
-      "type" : "string"
-    },
-    "consumerPriceVAT" : {
-      "type" : "number"
-    },
-    "consumerPrice" : {
-      "type" : "number"
-    },
-    "vat" : {
-      "type" : "number"
-    }
-  }
-};
-            defs.OrigoProduct_stock = {
-  "properties" : {
-    "volume" : {
-      "type" : "number"
-    }
-  }
-};
             defs.ProductInfo = {
   "type" : "object",
   "properties" : {
-    "number" : {
-      "type" : "string"
-    },
-    "name" : {
-      "type" : "string"
-    },
-    "manufacturer" : {
-      "type" : "string"
-    }
-  }
-};
-            defs.ProductPrice = {
-  "type" : "object",
-  "properties" : {
-    "currency" : {
-      "type" : "string"
-    },
-    "consumerPriceVAT" : {
-      "type" : "number"
-    },
-    "consumerPrice" : {
-      "type" : "number"
-    },
-    "vat" : {
-      "type" : "number"
-    }
-  }
-};
-            defs.ProductStock = {
-  "type" : "object",
-  "properties" : {
-    "volume" : {
-      "type" : "number"
+    "id" : {
+      "type" : "string",
+      "description" : "Unique id of the product"
     }
   }
 };
@@ -831,32 +721,9 @@ margin-bottom: 20px;
             -->
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
-                  <li class="nav-header" data-group="Order"><a href="#api-Order">API Methods - Order</a></li>
-                    <li data-group="Order" data-name="getOrderInfo" class="">
-                      <a href="#api-Order-getOrderInfo">getOrderInfo</a>
-                    </li>
-                    <li data-group="Order" data-name="searchOrder" class="">
-                      <a href="#api-Order-searchOrder">searchOrder</a>
-                    </li>
-                  <li class="nav-header" data-group="Origo"><a href="#api-Origo">API Methods - Origo</a></li>
-                    <li data-group="Origo" data-name="getOrigoProduct" class="">
-                      <a href="#api-Origo-getOrigoProduct">getOrigoProduct</a>
-                    </li>
                   <li class="nav-header" data-group="Product"><a href="#api-Product">API Methods - Product</a></li>
-                    <li data-group="Product" data-name="getProduct" class="">
-                      <a href="#api-Product-getProduct">getProduct</a>
-                    </li>
-                    <li data-group="Product" data-name="getProductInfo" class="">
-                      <a href="#api-Product-getProductInfo">getProductInfo</a>
-                    </li>
-                    <li data-group="Product" data-name="getProductPrice" class="">
-                      <a href="#api-Product-getProductPrice">getProductPrice</a>
-                    </li>
-                    <li data-group="Product" data-name="getProductStock" class="">
-                      <a href="#api-Product-getProductStock">getProductStock</a>
-                    </li>
-                    <li data-group="Product" data-name="searchProduct" class="">
-                      <a href="#api-Product-searchProduct">searchProduct</a>
+                    <li data-group="Product" data-name="productSearch" class="">
+                      <a href="#api-Product-productSearch">productSearch</a>
                     </li>
           </ul>
         </nav>
@@ -864,7 +731,7 @@ margin-bottom: 20px;
       <div id="content">
         <div id="project">
           <div class="pull-left">
-            <h1>Oriola Public Gatekeeper</h1>
+            <h1>Gatekeeper Public API</h1>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -873,2348 +740,22 @@ margin-bottom: 20px;
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 0.0.1</div>
             <hr>
-            <div>This is the first draft of the Oriola Gatekeeper API.</div>
+            <div>Gatekeeper Public API</div>
           </div>
         </div>
         <div id="sections">
-                <section id="api-Order">
-                  <h1>Order</h1>
-                    <div id="api-Order-getOrderInfo">
-                      <article id="api-Order-getOrderInfo-0" data-group="User" data-name="getOrderInfo" data-version="0">
-                        <div class="pull-left">
-                          <h1>getOrderInfo</h1>
-                          <p>Find order by ID</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked">Returns a single order</p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/order/{orderNumber}/info</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Order-getOrderInfo-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Order-getOrderInfo-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Order-getOrderInfo-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Order-getOrderInfo-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Order-getOrderInfo-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Order-getOrderInfo-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Order-getOrderInfo-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Order-getOrderInfo-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Order-getOrderInfo-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Order-getOrderInfo-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Order-getOrderInfo-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Order-getOrderInfo-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://so3yfmy49i.execute-api.eu-west-1.amazonaws.com/v0/api/order/{orderNumber}/info"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-Order-getOrderInfo-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.OrderApi;
-
-import java.io.File;
-import java.util.*;
-
-public class OrderApiExample {
-
-    public static void main(String[] args) {
-        
-        OrderApi apiInstance = new OrderApi();
-        String orderNumber = orderNumber_example; // String | ID of order to return
-        try {
-            Order result = apiInstance.getOrderInfo(orderNumber);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling OrderApi#getOrderInfo");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Order-getOrderInfo-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.OrderApi;
-
-public class OrderApiExample {
-
-    public static void main(String[] args) {
-        OrderApi apiInstance = new OrderApi();
-        String orderNumber = orderNumber_example; // String | ID of order to return
-        try {
-            Order result = apiInstance.getOrderInfo(orderNumber);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling OrderApi#getOrderInfo");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-Order-getOrderInfo-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-Order-getOrderInfo-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *orderNumber = orderNumber_example; // ID of order to return
-
-OrderApi *apiInstance = [[OrderApi alloc] init];
-
-// Find order by ID
-[apiInstance getOrderInfoWith:orderNumber
-              completionHandler: ^(Order output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Order-getOrderInfo-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var OriolaPublicGatekeeper = require('oriola_public_gatekeeper');
-
-var api = new OriolaPublicGatekeeper.OrderApi()
-
-var orderNumber = orderNumber_example; // {String} ID of order to return
-
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getOrderInfo(orderNumber, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-Order-getOrderInfo-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-Order-getOrderInfo-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class getOrderInfoExample
-    {
-        public void main()
-        {
-            
-            var apiInstance = new OrderApi();
-            var orderNumber = orderNumber_example;  // String | ID of order to return
-
-            try
-            {
-                // Find order by ID
-                Order result = apiInstance.getOrderInfo(orderNumber);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling OrderApi.getOrderInfo: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Order-getOrderInfo-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\Api\OrderApi();
-$orderNumber = orderNumber_example; // String | ID of order to return
-
-try {
-    $result = $api_instance->getOrderInfo($orderNumber);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling OrderApi->getOrderInfo: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Order-getOrderInfo-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::OrderApi;
-
-my $api_instance = WWW::SwaggerClient::OrderApi->new();
-my $orderNumber = orderNumber_example; # String | ID of order to return
-
-eval { 
-    my $result = $api_instance->getOrderInfo(orderNumber => $orderNumber);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling OrderApi->getOrderInfo: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Order-getOrderInfo-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.OrderApi()
-orderNumber = orderNumber_example # String | ID of order to return
-
-try: 
-    # Find order by ID
-    api_response = api_instance.get_order_info(orderNumber)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling OrderApi->getOrderInfo: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">orderNumber*</td>
-<td>
-
-
-    <div id="d2e199_getOrderInfo_orderNumber">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description">
-                        ID of order to return
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - successful operation </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-getOrderInfo-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-getOrderInfo-200-schema">
-                                  <div id='responses-getOrderInfo-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "successful operation",
-  "schema" : {
-    "$ref" : "#/definitions/Order"
-  }
-};
-                                        var schema = schemaWrapper.schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-getOrderInfo-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-getOrderInfo-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-getOrderInfo-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                            <h3> Status: 400 - Invalid ID supplied </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                            <h3> Status: 404 - Order not found </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-Order-searchOrder">
-                      <article id="api-Order-searchOrder-0" data-group="User" data-name="searchOrder" data-version="0">
-                        <div class="pull-left">
-                          <h1>searchOrder</h1>
-                          <p>Search for an order</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked">Returns a list of orders (0 ... N)</p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/order/search</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Order-searchOrder-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Order-searchOrder-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Order-searchOrder-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Order-searchOrder-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Order-searchOrder-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Order-searchOrder-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Order-searchOrder-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Order-searchOrder-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Order-searchOrder-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Order-searchOrder-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Order-searchOrder-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Order-searchOrder-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://so3yfmy49i.execute-api.eu-west-1.amazonaws.com/v0/api/order/search?any=&id=&date=&manufacturer="</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-Order-searchOrder-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.OrderApi;
-
-import java.io.File;
-import java.util.*;
-
-public class OrderApiExample {
-
-    public static void main(String[] args) {
-        
-        OrderApi apiInstance = new OrderApi();
-        String any = any_example; // String | Wildcard. Search in all fields.
-        String id = id_example; // String | Search for ID number
-        String date = date_example; // String | Search orders from a specific date
-        String manufacturer = manufacturer_example; // String | Search orders from a specific manufacturer
-        try {
-            array[Order] result = apiInstance.searchOrder(any, id, date, manufacturer);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling OrderApi#searchOrder");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Order-searchOrder-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.OrderApi;
-
-public class OrderApiExample {
-
-    public static void main(String[] args) {
-        OrderApi apiInstance = new OrderApi();
-        String any = any_example; // String | Wildcard. Search in all fields.
-        String id = id_example; // String | Search for ID number
-        String date = date_example; // String | Search orders from a specific date
-        String manufacturer = manufacturer_example; // String | Search orders from a specific manufacturer
-        try {
-            array[Order] result = apiInstance.searchOrder(any, id, date, manufacturer);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling OrderApi#searchOrder");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-Order-searchOrder-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-Order-searchOrder-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *any = any_example; // Wildcard. Search in all fields. (optional)
-String *id = id_example; // Search for ID number (optional)
-String *date = date_example; // Search orders from a specific date (optional)
-String *manufacturer = manufacturer_example; // Search orders from a specific manufacturer (optional)
-
-OrderApi *apiInstance = [[OrderApi alloc] init];
-
-// Search for an order
-[apiInstance searchOrderWith:any
-    id:id
-    date:date
-    manufacturer:manufacturer
-              completionHandler: ^(array[Order] output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Order-searchOrder-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var OriolaPublicGatekeeper = require('oriola_public_gatekeeper');
-
-var api = new OriolaPublicGatekeeper.OrderApi()
-
-var opts = { 
-  'any': any_example, // {String} Wildcard. Search in all fields.
-  'id': id_example, // {String} Search for ID number
-  'date': date_example, // {String} Search orders from a specific date
-  'manufacturer': manufacturer_example // {String} Search orders from a specific manufacturer
-};
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.searchOrder(opts, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-Order-searchOrder-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-Order-searchOrder-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class searchOrderExample
-    {
-        public void main()
-        {
-            
-            var apiInstance = new OrderApi();
-            var any = any_example;  // String | Wildcard. Search in all fields. (optional) 
-            var id = id_example;  // String | Search for ID number (optional) 
-            var date = date_example;  // String | Search orders from a specific date (optional) 
-            var manufacturer = manufacturer_example;  // String | Search orders from a specific manufacturer (optional) 
-
-            try
-            {
-                // Search for an order
-                array[Order] result = apiInstance.searchOrder(any, id, date, manufacturer);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling OrderApi.searchOrder: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Order-searchOrder-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\Api\OrderApi();
-$any = any_example; // String | Wildcard. Search in all fields.
-$id = id_example; // String | Search for ID number
-$date = date_example; // String | Search orders from a specific date
-$manufacturer = manufacturer_example; // String | Search orders from a specific manufacturer
-
-try {
-    $result = $api_instance->searchOrder($any, $id, $date, $manufacturer);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling OrderApi->searchOrder: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Order-searchOrder-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::OrderApi;
-
-my $api_instance = WWW::SwaggerClient::OrderApi->new();
-my $any = any_example; # String | Wildcard. Search in all fields.
-my $id = id_example; # String | Search for ID number
-my $date = date_example; # String | Search orders from a specific date
-my $manufacturer = manufacturer_example; # String | Search orders from a specific manufacturer
-
-eval { 
-    my $result = $api_instance->searchOrder(any => $any, id => $id, date => $date, manufacturer => $manufacturer);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling OrderApi->searchOrder: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Order-searchOrder-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.OrderApi()
-any = any_example # String | Wildcard. Search in all fields. (optional)
-id = id_example # String | Search for ID number (optional)
-date = date_example # String | Search orders from a specific date (optional)
-manufacturer = manufacturer_example # String | Search orders from a specific manufacturer (optional)
-
-try: 
-    # Search for an order
-    api_response = api_instance.search_order(any=any, id=id, date=date, manufacturer=manufacturer)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling OrderApi->searchOrder: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-
-
-
-
-                            <div class="methodsubtabletitle">Query parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">any</td>
-<td>
-
-
-    <div id="d2e199_searchOrder_any">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description">
-                        Wildcard. Search in all fields.
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                                <tr><td style="width:150px;">id</td>
-<td>
-
-
-    <div id="d2e199_searchOrder_id">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description">
-                        Search for ID number
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                                <tr><td style="width:150px;">date</td>
-<td>
-
-
-    <div id="d2e199_searchOrder_date">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description">
-                        Search orders from a specific date
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                                <tr><td style="width:150px;">manufacturer</td>
-<td>
-
-
-    <div id="d2e199_searchOrder_manufacturer">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description">
-                        Search orders from a specific manufacturer
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - successful operation </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-searchOrder-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-searchOrder-200-schema">
-                                  <div id='responses-searchOrder-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "successful operation",
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/Order"
-    }
-  }
-};
-                                        var schema = schemaWrapper.schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-searchOrder-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-searchOrder-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-searchOrder-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                            <h3> Status: 400 - Missing search query </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                            <h3> Status: 404 - Order not found </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                  </section>
-                <section id="api-Origo">
-                  <h1>Origo</h1>
-                    <div id="api-Origo-getOrigoProduct">
-                      <article id="api-Origo-getOrigoProduct-0" data-group="User" data-name="getOrigoProduct" data-version="0">
-                        <div class="pull-left">
-                          <h1>getOrigoProduct</h1>
-                          <p>Find product by ID</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked">Returns a single order with stock, price and info.</p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/origo/product/{productNumber}</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Origo-getOrigoProduct-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Origo-getOrigoProduct-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Origo-getOrigoProduct-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Origo-getOrigoProduct-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Origo-getOrigoProduct-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Origo-getOrigoProduct-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Origo-getOrigoProduct-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Origo-getOrigoProduct-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Origo-getOrigoProduct-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Origo-getOrigoProduct-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Origo-getOrigoProduct-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Origo-getOrigoProduct-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://so3yfmy49i.execute-api.eu-west-1.amazonaws.com/v0/api/origo/product/{productNumber}"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-Origo-getOrigoProduct-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.OrigoApi;
-
-import java.io.File;
-import java.util.*;
-
-public class OrigoApiExample {
-
-    public static void main(String[] args) {
-        
-        OrigoApi apiInstance = new OrigoApi();
-        String productNumber = productNumber_example; // String | ID of product to return
-        try {
-            OrigoProduct result = apiInstance.getOrigoProduct(productNumber);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling OrigoApi#getOrigoProduct");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Origo-getOrigoProduct-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.OrigoApi;
-
-public class OrigoApiExample {
-
-    public static void main(String[] args) {
-        OrigoApi apiInstance = new OrigoApi();
-        String productNumber = productNumber_example; // String | ID of product to return
-        try {
-            OrigoProduct result = apiInstance.getOrigoProduct(productNumber);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling OrigoApi#getOrigoProduct");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-Origo-getOrigoProduct-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-Origo-getOrigoProduct-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *productNumber = productNumber_example; // ID of product to return
-
-OrigoApi *apiInstance = [[OrigoApi alloc] init];
-
-// Find product by ID
-[apiInstance getOrigoProductWith:productNumber
-              completionHandler: ^(OrigoProduct output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Origo-getOrigoProduct-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var OriolaPublicGatekeeper = require('oriola_public_gatekeeper');
-
-var api = new OriolaPublicGatekeeper.OrigoApi()
-
-var productNumber = productNumber_example; // {String} ID of product to return
-
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getOrigoProduct(productNumber, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-Origo-getOrigoProduct-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-Origo-getOrigoProduct-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class getOrigoProductExample
-    {
-        public void main()
-        {
-            
-            var apiInstance = new OrigoApi();
-            var productNumber = productNumber_example;  // String | ID of product to return
-
-            try
-            {
-                // Find product by ID
-                OrigoProduct result = apiInstance.getOrigoProduct(productNumber);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling OrigoApi.getOrigoProduct: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Origo-getOrigoProduct-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\Api\OrigoApi();
-$productNumber = productNumber_example; // String | ID of product to return
-
-try {
-    $result = $api_instance->getOrigoProduct($productNumber);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling OrigoApi->getOrigoProduct: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Origo-getOrigoProduct-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::OrigoApi;
-
-my $api_instance = WWW::SwaggerClient::OrigoApi->new();
-my $productNumber = productNumber_example; # String | ID of product to return
-
-eval { 
-    my $result = $api_instance->getOrigoProduct(productNumber => $productNumber);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling OrigoApi->getOrigoProduct: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Origo-getOrigoProduct-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.OrigoApi()
-productNumber = productNumber_example # String | ID of product to return
-
-try: 
-    # Find product by ID
-    api_response = api_instance.get_origo_product(productNumber)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling OrigoApi->getOrigoProduct: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">productNumber*</td>
-<td>
-
-
-    <div id="d2e199_getOrigoProduct_productNumber">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description">
-                        ID of product to return
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - successful operation </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-getOrigoProduct-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-getOrigoProduct-200-schema">
-                                  <div id='responses-getOrigoProduct-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "successful operation",
-  "schema" : {
-    "$ref" : "#/definitions/OrigoProduct"
-  }
-};
-                                        var schema = schemaWrapper.schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-getOrigoProduct-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-getOrigoProduct-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-getOrigoProduct-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                            <h3> Status: 400 - Invalid ID supplied </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                            <h3> Status: 404 - Order not found </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                  </section>
                 <section id="api-Product">
                   <h1>Product</h1>
-                    <div id="api-Product-getProduct">
-                      <article id="api-Product-getProduct-0" data-group="User" data-name="getProduct" data-version="0">
+                    <div id="api-Product-productSearch">
+                      <article id="api-Product-productSearch-0" data-group="User" data-name="productSearch" data-version="0">
                         <div class="pull-left">
-                          <h1>getProduct</h1>
-                          <p>Get everything about a product</p>
+                          <h1>productSearch</h1>
+                          <p>Searches products</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
                         <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/product/{productNumber}</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Product-getProduct-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Product-getProduct-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Product-getProduct-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Product-getProduct-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Product-getProduct-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Product-getProduct-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Product-getProduct-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Product-getProduct-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Product-getProduct-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Product-getProduct-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Product-getProduct-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Product-getProduct-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://so3yfmy49i.execute-api.eu-west-1.amazonaws.com/v0/api/product/{productNumber}?productChannel="</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-Product-getProduct-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.ProductApi;
-
-import java.io.File;
-import java.util.*;
-
-public class ProductApiExample {
-
-    public static void main(String[] args) {
-        
-        ProductApi apiInstance = new ProductApi();
-        String productNumber = productNumber_example; // String | ID of product to return. The ID is always 8 digits.
-        String productChannel = productChannel_example; // String | The channel of which the product information should be returned.
-        try {
-            ProductInfo result = apiInstance.getProduct(productNumber, productChannel);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling ProductApi#getProduct");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Product-getProduct-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.ProductApi;
-
-public class ProductApiExample {
-
-    public static void main(String[] args) {
-        ProductApi apiInstance = new ProductApi();
-        String productNumber = productNumber_example; // String | ID of product to return. The ID is always 8 digits.
-        String productChannel = productChannel_example; // String | The channel of which the product information should be returned.
-        try {
-            ProductInfo result = apiInstance.getProduct(productNumber, productChannel);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling ProductApi#getProduct");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-Product-getProduct-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-Product-getProduct-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *productNumber = productNumber_example; // ID of product to return. The ID is always 8 digits.
-String *productChannel = productChannel_example; // The channel of which the product information should be returned. (optional)
-
-ProductApi *apiInstance = [[ProductApi alloc] init];
-
-// Get everything about a product
-[apiInstance getProductWith:productNumber
-    productChannel:productChannel
-              completionHandler: ^(ProductInfo output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProduct-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var OriolaPublicGatekeeper = require('oriola_public_gatekeeper');
-
-var api = new OriolaPublicGatekeeper.ProductApi()
-
-var productNumber = productNumber_example; // {String} ID of product to return. The ID is always 8 digits.
-
-var opts = { 
-  'productChannel': productChannel_example // {String} The channel of which the product information should be returned.
-};
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getProduct(productNumber, opts, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-Product-getProduct-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-Product-getProduct-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class getProductExample
-    {
-        public void main()
-        {
-            
-            var apiInstance = new ProductApi();
-            var productNumber = productNumber_example;  // String | ID of product to return. The ID is always 8 digits.
-            var productChannel = productChannel_example;  // String | The channel of which the product information should be returned. (optional) 
-
-            try
-            {
-                // Get everything about a product
-                ProductInfo result = apiInstance.getProduct(productNumber, productChannel);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling ProductApi.getProduct: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProduct-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\Api\ProductApi();
-$productNumber = productNumber_example; // String | ID of product to return. The ID is always 8 digits.
-$productChannel = productChannel_example; // String | The channel of which the product information should be returned.
-
-try {
-    $result = $api_instance->getProduct($productNumber, $productChannel);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling ProductApi->getProduct: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProduct-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::ProductApi;
-
-my $api_instance = WWW::SwaggerClient::ProductApi->new();
-my $productNumber = productNumber_example; # String | ID of product to return. The ID is always 8 digits.
-my $productChannel = productChannel_example; # String | The channel of which the product information should be returned.
-
-eval { 
-    my $result = $api_instance->getProduct(productNumber => $productNumber, productChannel => $productChannel);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling ProductApi->getProduct: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProduct-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.ProductApi()
-productNumber = productNumber_example # String | ID of product to return. The ID is always 8 digits.
-productChannel = productChannel_example # String | The channel of which the product information should be returned. (optional)
-
-try: 
-    # Get everything about a product
-    api_response = api_instance.get_product(productNumber, productChannel=productChannel)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ProductApi->getProduct: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">productNumber*</td>
-<td>
-
-
-    <div id="d2e199_getProduct_productNumber">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description">
-                        ID of product to return. The ID is always 8 digits.
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-
-
-
-                            <div class="methodsubtabletitle">Query parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">productChannel</td>
-<td>
-
-
-    <div id="d2e199_getProduct_productChannel">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description">
-                        The channel of which the product information should be returned.
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - successful operation </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-getProduct-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-getProduct-200-schema">
-                                  <div id='responses-getProduct-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "successful operation",
-  "schema" : {
-    "$ref" : "#/definitions/ProductInfo"
-  }
-};
-                                        var schema = schemaWrapper.schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-getProduct-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-getProduct-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-getProduct-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                            <h3> Status: 400 - Invalid ID supplied </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                            <h3> Status: 404 - Product not found </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-Product-getProductInfo">
-                      <article id="api-Product-getProductInfo-0" data-group="User" data-name="getProductInfo" data-version="0">
-                        <div class="pull-left">
-                          <h1>getProductInfo</h1>
-                          <p>Get product information</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked"></p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/product/{productNumber}/info</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Product-getProductInfo-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Product-getProductInfo-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Product-getProductInfo-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Product-getProductInfo-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Product-getProductInfo-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Product-getProductInfo-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Product-getProductInfo-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Product-getProductInfo-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Product-getProductInfo-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Product-getProductInfo-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Product-getProductInfo-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Product-getProductInfo-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://so3yfmy49i.execute-api.eu-west-1.amazonaws.com/v0/api/product/{productNumber}/info?productChannel="</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-Product-getProductInfo-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.ProductApi;
-
-import java.io.File;
-import java.util.*;
-
-public class ProductApiExample {
-
-    public static void main(String[] args) {
-        
-        ProductApi apiInstance = new ProductApi();
-        String productNumber = productNumber_example; // String | ID of product to return. The ID is always 8 digits.
-        String productChannel = productChannel_example; // String | The channel of which the product information should be returned.
-        try {
-            ProductInfo result = apiInstance.getProductInfo(productNumber, productChannel);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling ProductApi#getProductInfo");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Product-getProductInfo-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.ProductApi;
-
-public class ProductApiExample {
-
-    public static void main(String[] args) {
-        ProductApi apiInstance = new ProductApi();
-        String productNumber = productNumber_example; // String | ID of product to return. The ID is always 8 digits.
-        String productChannel = productChannel_example; // String | The channel of which the product information should be returned.
-        try {
-            ProductInfo result = apiInstance.getProductInfo(productNumber, productChannel);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling ProductApi#getProductInfo");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-Product-getProductInfo-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-Product-getProductInfo-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *productNumber = productNumber_example; // ID of product to return. The ID is always 8 digits.
-String *productChannel = productChannel_example; // The channel of which the product information should be returned. (optional)
-
-ProductApi *apiInstance = [[ProductApi alloc] init];
-
-// Get product information
-[apiInstance getProductInfoWith:productNumber
-    productChannel:productChannel
-              completionHandler: ^(ProductInfo output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProductInfo-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var OriolaPublicGatekeeper = require('oriola_public_gatekeeper');
-
-var api = new OriolaPublicGatekeeper.ProductApi()
-
-var productNumber = productNumber_example; // {String} ID of product to return. The ID is always 8 digits.
-
-var opts = { 
-  'productChannel': productChannel_example // {String} The channel of which the product information should be returned.
-};
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getProductInfo(productNumber, opts, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-Product-getProductInfo-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-Product-getProductInfo-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class getProductInfoExample
-    {
-        public void main()
-        {
-            
-            var apiInstance = new ProductApi();
-            var productNumber = productNumber_example;  // String | ID of product to return. The ID is always 8 digits.
-            var productChannel = productChannel_example;  // String | The channel of which the product information should be returned. (optional) 
-
-            try
-            {
-                // Get product information
-                ProductInfo result = apiInstance.getProductInfo(productNumber, productChannel);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling ProductApi.getProductInfo: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProductInfo-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\Api\ProductApi();
-$productNumber = productNumber_example; // String | ID of product to return. The ID is always 8 digits.
-$productChannel = productChannel_example; // String | The channel of which the product information should be returned.
-
-try {
-    $result = $api_instance->getProductInfo($productNumber, $productChannel);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling ProductApi->getProductInfo: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProductInfo-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::ProductApi;
-
-my $api_instance = WWW::SwaggerClient::ProductApi->new();
-my $productNumber = productNumber_example; # String | ID of product to return. The ID is always 8 digits.
-my $productChannel = productChannel_example; # String | The channel of which the product information should be returned.
-
-eval { 
-    my $result = $api_instance->getProductInfo(productNumber => $productNumber, productChannel => $productChannel);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling ProductApi->getProductInfo: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProductInfo-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.ProductApi()
-productNumber = productNumber_example # String | ID of product to return. The ID is always 8 digits.
-productChannel = productChannel_example # String | The channel of which the product information should be returned. (optional)
-
-try: 
-    # Get product information
-    api_response = api_instance.get_product_info(productNumber, productChannel=productChannel)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ProductApi->getProductInfo: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">productNumber*</td>
-<td>
-
-
-    <div id="d2e199_getProductInfo_productNumber">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description">
-                        ID of product to return. The ID is always 8 digits.
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-
-
-
-                            <div class="methodsubtabletitle">Query parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">productChannel</td>
-<td>
-
-
-    <div id="d2e199_getProductInfo_productChannel">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description">
-                        The channel of which the product information should be returned.
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - successful operation </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-getProductInfo-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-getProductInfo-200-schema">
-                                  <div id='responses-getProductInfo-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "successful operation",
-  "schema" : {
-    "$ref" : "#/definitions/ProductInfo"
-  }
-};
-                                        var schema = schemaWrapper.schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-getProductInfo-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-getProductInfo-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-getProductInfo-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                            <h3> Status: 400 - Invalid ID supplied </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                            <h3> Status: 404 - Product not found </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-Product-getProductPrice">
-                      <article id="api-Product-getProductPrice-0" data-group="User" data-name="getProductPrice" data-version="0">
-                        <div class="pull-left">
-                          <h1>getProductPrice</h1>
-                          <p>Returns pricing information for an order.</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked">Returns pricing information for an order.</p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/product/{productNumber}/price</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Product-getProductPrice-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Product-getProductPrice-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Product-getProductPrice-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Product-getProductPrice-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Product-getProductPrice-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Product-getProductPrice-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Product-getProductPrice-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Product-getProductPrice-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Product-getProductPrice-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Product-getProductPrice-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Product-getProductPrice-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Product-getProductPrice-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://so3yfmy49i.execute-api.eu-west-1.amazonaws.com/v0/api/product/{productNumber}/price"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-Product-getProductPrice-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.ProductApi;
-
-import java.io.File;
-import java.util.*;
-
-public class ProductApiExample {
-
-    public static void main(String[] args) {
-        
-        ProductApi apiInstance = new ProductApi();
-        String productNumber = productNumber_example; // String | ID of product to return. The ID is always 8 digits.
-        try {
-            ProductPrice result = apiInstance.getProductPrice(productNumber);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling ProductApi#getProductPrice");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Product-getProductPrice-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.ProductApi;
-
-public class ProductApiExample {
-
-    public static void main(String[] args) {
-        ProductApi apiInstance = new ProductApi();
-        String productNumber = productNumber_example; // String | ID of product to return. The ID is always 8 digits.
-        try {
-            ProductPrice result = apiInstance.getProductPrice(productNumber);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling ProductApi#getProductPrice");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-Product-getProductPrice-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-Product-getProductPrice-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *productNumber = productNumber_example; // ID of product to return. The ID is always 8 digits.
-
-ProductApi *apiInstance = [[ProductApi alloc] init];
-
-// Returns pricing information for an order.
-[apiInstance getProductPriceWith:productNumber
-              completionHandler: ^(ProductPrice output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProductPrice-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var OriolaPublicGatekeeper = require('oriola_public_gatekeeper');
-
-var api = new OriolaPublicGatekeeper.ProductApi()
-
-var productNumber = productNumber_example; // {String} ID of product to return. The ID is always 8 digits.
-
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getProductPrice(productNumber, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-Product-getProductPrice-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-Product-getProductPrice-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class getProductPriceExample
-    {
-        public void main()
-        {
-            
-            var apiInstance = new ProductApi();
-            var productNumber = productNumber_example;  // String | ID of product to return. The ID is always 8 digits.
-
-            try
-            {
-                // Returns pricing information for an order.
-                ProductPrice result = apiInstance.getProductPrice(productNumber);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling ProductApi.getProductPrice: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProductPrice-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\Api\ProductApi();
-$productNumber = productNumber_example; // String | ID of product to return. The ID is always 8 digits.
-
-try {
-    $result = $api_instance->getProductPrice($productNumber);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling ProductApi->getProductPrice: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProductPrice-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::ProductApi;
-
-my $api_instance = WWW::SwaggerClient::ProductApi->new();
-my $productNumber = productNumber_example; # String | ID of product to return. The ID is always 8 digits.
-
-eval { 
-    my $result = $api_instance->getProductPrice(productNumber => $productNumber);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling ProductApi->getProductPrice: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProductPrice-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.ProductApi()
-productNumber = productNumber_example # String | ID of product to return. The ID is always 8 digits.
-
-try: 
-    # Returns pricing information for an order.
-    api_response = api_instance.get_product_price(productNumber)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ProductApi->getProductPrice: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">productNumber*</td>
-<td>
-
-
-    <div id="d2e199_getProductPrice_productNumber">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description">
-                        ID of product to return. The ID is always 8 digits.
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - successful operation </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-getProductPrice-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-getProductPrice-200-schema">
-                                  <div id='responses-getProductPrice-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "successful operation",
-  "schema" : {
-    "$ref" : "#/definitions/ProductPrice"
-  }
-};
-                                        var schema = schemaWrapper.schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-getProductPrice-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-getProductPrice-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-getProductPrice-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                            <h3> Status: 400 - Invalid ID supplied </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                            <h3> Status: 404 - Product not found </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-Product-getProductStock">
-                      <article id="api-Product-getProductStock-0" data-group="User" data-name="getProductStock" data-version="0">
-                        <div class="pull-left">
-                          <h1>getProductStock</h1>
-                          <p>Stock level for a product.</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked">Returns the stocklevel for a specific product.</p>
-                        <p></p>
-                        <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/product/{productNumber}/stock</span></code></pre>
-                        <p>
-                          <h3>Usage and SDK Samples</h3>
-                        </p>
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Product-getProductStock-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Product-getProductStock-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Product-getProductStock-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Product-getProductStock-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Product-getProductStock-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Product-getProductStock-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Product-getProductStock-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Product-getProductStock-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Product-getProductStock-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Product-getProductStock-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Product-getProductStock-0-python">Python</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Product-getProductStock-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://so3yfmy49i.execute-api.eu-west-1.amazonaws.com/v0/api/product/{productNumber}/stock"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-Product-getProductStock-0-java">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.ProductApi;
-
-import java.io.File;
-import java.util.*;
-
-public class ProductApiExample {
-
-    public static void main(String[] args) {
-        
-        ProductApi apiInstance = new ProductApi();
-        String productNumber = productNumber_example; // String | ID of product to return. The ID is always 8 digits.
-        try {
-            ProductStock result = apiInstance.getProductStock(productNumber);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling ProductApi#getProductStock");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-Product-getProductStock-0-android">
-                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.ProductApi;
-
-public class ProductApiExample {
-
-    public static void main(String[] args) {
-        ProductApi apiInstance = new ProductApi();
-        String productNumber = productNumber_example; // String | ID of product to return. The ID is always 8 digits.
-        try {
-            ProductStock result = apiInstance.getProductStock(productNumber);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling ProductApi#getProductStock");
-            e.printStackTrace();
-        }
-    }
-}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-Product-getProductStock-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-Product-getProductStock-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *productNumber = productNumber_example; // ID of product to return. The ID is always 8 digits.
-
-ProductApi *apiInstance = [[ProductApi alloc] init];
-
-// Stock level for a product.
-[apiInstance getProductStockWith:productNumber
-              completionHandler: ^(ProductStock output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProductStock-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var OriolaPublicGatekeeper = require('oriola_public_gatekeeper');
-
-var api = new OriolaPublicGatekeeper.ProductApi()
-
-var productNumber = productNumber_example; // {String} ID of product to return. The ID is always 8 digits.
-
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.getProductStock(productNumber, callback);
-</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-Product-getProductStock-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-Product-getProductStock-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class getProductStockExample
-    {
-        public void main()
-        {
-            
-            var apiInstance = new ProductApi();
-            var productNumber = productNumber_example;  // String | ID of product to return. The ID is always 8 digits.
-
-            try
-            {
-                // Stock level for a product.
-                ProductStock result = apiInstance.getProductStock(productNumber);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling ProductApi.getProductStock: " + e.Message );
-            }
-        }
-    }
-}
-</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProductStock-0-php">
-                              <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new Swagger\Client\Api\ProductApi();
-$productNumber = productNumber_example; // String | ID of product to return. The ID is always 8 digits.
-
-try {
-    $result = $api_instance->getProductStock($productNumber);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling ProductApi->getProductStock: ', $e->getMessage(), PHP_EOL;
-}
-?></code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProductStock-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
-use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::ProductApi;
-
-my $api_instance = WWW::SwaggerClient::ProductApi->new();
-my $productNumber = productNumber_example; # String | ID of product to return. The ID is always 8 digits.
-
-eval { 
-    my $result = $api_instance->getProductStock(productNumber => $productNumber);
-    print Dumper($result);
-};
-if ($@) {
-    warn "Exception when calling ProductApi->getProductStock: $@\n";
-}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-Product-getProductStock-0-python">
-                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = swagger_client.ProductApi()
-productNumber = productNumber_example # String | ID of product to return. The ID is always 8 digits.
-
-try: 
-    # Stock level for a product.
-    api_response = api_instance.get_product_stock(productNumber)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ProductApi->getProductStock: %s\n" % e)</code></pre>
-                            </div>
-                          </div>
-
-                          <h2>Parameters</h2>
-
-                            <div class="methodsubtabletitle">Path parameters</div>
-                            <table id="methodsubtable">
-                                <tr>
-                                  <th width="150px">Name</th>
-                                  <th>Description</th>
-                                </tr>
-                                  <tr><td style="width:150px;">productNumber*</td>
-<td>
-
-
-    <div id="d2e199_getProductStock_productNumber">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description">
-                        ID of product to return. The ID is always 8 digits.
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
-
-
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - successful operation </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-getProductStock-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-getProductStock-200-schema">
-                                  <div id='responses-getProductStock-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "successful operation",
-  "schema" : {
-    "$ref" : "#/definitions/ProductStock"
-  }
-};
-                                        var schema = schemaWrapper.schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-getProductStock-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-getProductStock-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-getProductStock-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                            <h3> Status: 400 - Invalid ID supplied </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                            <h3> Status: 404 - Product not found </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                            </div>
-
-                        </article>
-                      </div>
-                      <hr>
-                    <div id="api-Product-searchProduct">
-                      <article id="api-Product-searchProduct-0" data-group="User" data-name="searchProduct" data-version="0">
-                        <div class="pull-left">
-                          <h1>searchProduct</h1>
-                          <p>Search for product</p>
-                        </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked">Returns a list of products (0 ... N)</p>
                         <p></p>
                         <br />
                         <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/product/search</span></code></pre>
@@ -3222,24 +763,24 @@ except ApiException as e:
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Product-searchProduct-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Product-searchProduct-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Product-searchProduct-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Product-searchProduct-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Product-searchProduct-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Product-searchProduct-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Product-searchProduct-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Product-searchProduct-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Product-searchProduct-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Product-searchProduct-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Product-searchProduct-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-Product-productSearch-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Product-productSearch-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Product-productSearch-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Product-productSearch-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Product-productSearch-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Product-productSearch-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Product-productSearch-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Product-productSearch-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Product-productSearch-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Product-productSearch-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Product-productSearch-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Product-searchProduct-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://so3yfmy49i.execute-api.eu-west-1.amazonaws.com/v0/api/product/search?name="</code></pre>
+                          <div class="tab-pane active" id="examples-Product-productSearch-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://tbd.com/v1/api/product/search?page=&pageSize=&name=&sorting="</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-Product-searchProduct-0-java">
+                          <div class="tab-pane" id="examples-Product-productSearch-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
@@ -3253,47 +794,59 @@ public class ProductApiExample {
     public static void main(String[] args) {
         
         ProductApi apiInstance = new ProductApi();
-        String name = name_example; // String | Search for products by name.
+        String name = name_example; // String | Search token for product name. If more tokes are sent, the API searches for each token and returns the intersection of the returned list for each search.
+        Integer page = 56; // Integer | The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned.
+        Integer pageSize = 56; // Integer | The maximum number of items returned in the list.
+        String sorting = sorting_example; // String | The desired sorting of the returned list. The variable can either be _"asc"_ or _"desc"_.
         try {
-            array[ProductInfo] result = apiInstance.searchProduct(name);
+            array[ProductInfo] result = apiInstance.productSearch(name, page, pageSize, sorting);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling ProductApi#searchProduct");
+            System.err.println("Exception when calling ProductApi#productSearch");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-Product-searchProduct-0-android">
+                          <div class="tab-pane" id="examples-Product-productSearch-0-android">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.ProductApi;
 
 public class ProductApiExample {
 
     public static void main(String[] args) {
         ProductApi apiInstance = new ProductApi();
-        String name = name_example; // String | Search for products by name.
+        String name = name_example; // String | Search token for product name. If more tokes are sent, the API searches for each token and returns the intersection of the returned list for each search.
+        Integer page = 56; // Integer | The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned.
+        Integer pageSize = 56; // Integer | The maximum number of items returned in the list.
+        String sorting = sorting_example; // String | The desired sorting of the returned list. The variable can either be _"asc"_ or _"desc"_.
         try {
-            array[ProductInfo] result = apiInstance.searchProduct(name);
+            array[ProductInfo] result = apiInstance.productSearch(name, page, pageSize, sorting);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling ProductApi#searchProduct");
+            System.err.println("Exception when calling ProductApi#productSearch");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-Product-searchProduct-0-groovy">
+  <div class="tab-pane" id="examples-Product-productSearch-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-Product-searchProduct-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *name = name_example; // Search for products by name. (optional)
+                            <div class="tab-pane" id="examples-Product-productSearch-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *name = name_example; // Search token for product name. If more tokes are sent, the API searches for each token and returns the intersection of the returned list for each search.
+Integer *page = 56; // The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned. (optional)
+Integer *pageSize = 56; // The maximum number of items returned in the list. (optional)
+String *sorting = sorting_example; // The desired sorting of the returned list. The variable can either be _"asc"_ or _"desc"_. (optional)
 
 ProductApi *apiInstance = [[ProductApi alloc] init];
 
-// Search for product
-[apiInstance searchProductWith:name
+// Searches products
+[apiInstance productSearchWith:name
+    page:page
+    pageSize:pageSize
+    sorting:sorting
               completionHandler: ^(array[ProductInfo] output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -3305,13 +858,17 @@ ProductApi *apiInstance = [[ProductApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Product-searchProduct-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var OriolaPublicGatekeeper = require('oriola_public_gatekeeper');
+                            <div class="tab-pane" id="examples-Product-productSearch-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var GatekeeperPublicApi = require('gatekeeper_public_api');
 
-var api = new OriolaPublicGatekeeper.ProductApi()
+var api = new GatekeeperPublicApi.ProductApi()
+
+var name = name_example; // {String} Search token for product name. If more tokes are sent, the API searches for each token and returns the intersection of the returned list for each search.
 
 var opts = { 
-  'name': name_example // {String} Search for products by name.
+  'page': 56, // {Integer} The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned.
+  'pageSize': 56, // {Integer} The maximum number of items returned in the list.
+  'sorting': sorting_example // {String} The desired sorting of the returned list. The variable can either be _"asc"_ or _"desc"_.
 };
 
 var callback = function(error, data, response) {
@@ -3321,14 +878,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.searchProduct(opts, callback);
+api.productSearch(name, opts, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-Product-searchProduct-0-angular">
+                            <!--<div class="tab-pane" id="examples-Product-productSearch-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-Product-searchProduct-0-csharp">
+                            <div class="tab-pane" id="examples-Product-productSearch-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -3337,23 +894,26 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class searchProductExample
+    public class productSearchExample
     {
         public void main()
         {
             
             var apiInstance = new ProductApi();
-            var name = name_example;  // String | Search for products by name. (optional) 
+            var name = name_example;  // String | Search token for product name. If more tokes are sent, the API searches for each token and returns the intersection of the returned list for each search.
+            var page = 56;  // Integer | The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned. (optional) 
+            var pageSize = 56;  // Integer | The maximum number of items returned in the list. (optional) 
+            var sorting = sorting_example;  // String | The desired sorting of the returned list. The variable can either be _"asc"_ or _"desc"_. (optional) 
 
             try
             {
-                // Search for product
-                array[ProductInfo] result = apiInstance.searchProduct(name);
+                // Searches products
+                array[ProductInfo] result = apiInstance.productSearch(name, page, pageSize, sorting);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling ProductApi.searchProduct: " + e.Message );
+                Debug.Print("Exception when calling ProductApi.productSearch: " + e.Message );
             }
         }
     }
@@ -3361,40 +921,46 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Product-searchProduct-0-php">
+                            <div class="tab-pane" id="examples-Product-productSearch-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\Api\ProductApi();
-$name = name_example; // String | Search for products by name.
+$name = name_example; // String | Search token for product name. If more tokes are sent, the API searches for each token and returns the intersection of the returned list for each search.
+$page = 56; // Integer | The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned.
+$pageSize = 56; // Integer | The maximum number of items returned in the list.
+$sorting = sorting_example; // String | The desired sorting of the returned list. The variable can either be _"asc"_ or _"desc"_.
 
 try {
-    $result = $api_instance->searchProduct($name);
+    $result = $api_instance->productSearch($name, $page, $pageSize, $sorting);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling ProductApi->searchProduct: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling ProductApi->productSearch: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Product-searchProduct-0-perl">
+                            <div class="tab-pane" id="examples-Product-productSearch-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::ProductApi;
 
 my $api_instance = WWW::SwaggerClient::ProductApi->new();
-my $name = name_example; # String | Search for products by name.
+my $name = name_example; # String | Search token for product name. If more tokes are sent, the API searches for each token and returns the intersection of the returned list for each search.
+my $page = 56; # Integer | The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned.
+my $pageSize = 56; # Integer | The maximum number of items returned in the list.
+my $sorting = sorting_example; # String | The desired sorting of the returned list. The variable can either be _"asc"_ or _"desc"_.
 
 eval { 
-    my $result = $api_instance->searchProduct(name => $name);
+    my $result = $api_instance->productSearch(name => $name, page => $page, pageSize => $pageSize, sorting => $sorting);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling ProductApi->searchProduct: $@\n";
+    warn "Exception when calling ProductApi->productSearch: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Product-searchProduct-0-python">
+                            <div class="tab-pane" id="examples-Product-productSearch-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -3403,14 +969,17 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.ProductApi()
-name = name_example # String | Search for products by name. (optional)
+name = name_example # String | Search token for product name. If more tokes are sent, the API searches for each token and returns the intersection of the returned list for each search.
+page = 56 # Integer | The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned. (optional)
+pageSize = 56 # Integer | The maximum number of items returned in the list. (optional)
+sorting = sorting_example # String | The desired sorting of the returned list. The variable can either be _"asc"_ or _"desc"_. (optional)
 
 try: 
-    # Search for product
-    api_response = api_instance.search_product(name=name)
+    # Searches products
+    api_response = api_instance.product_search(name, page=page, pageSize=pageSize, sorting=sorting)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling ProductApi->searchProduct: %s\n" % e)</code></pre>
+    print("Exception when calling ProductApi->productSearch: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -3426,11 +995,51 @@ except ApiException as e:
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                                <tr><td style="width:150px;">name</td>
+                                <tr><td style="width:150px;">page</td>
 <td>
 
 
-    <div id="d2e199_searchProduct_name">
+    <div id="d2e199_productSearch_page">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+
+                    <div class="inner description">
+                        The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">pageSize</td>
+<td>
+
+
+    <div id="d2e199_productSearch_pageSize">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+
+                    <div class="inner description">
+                        The maximum number of items returned in the list.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">name*</td>
+<td>
+
+
+    <div id="d2e199_productSearch_name">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -3438,7 +1047,30 @@ except ApiException as e:
                 </span>
 
                     <div class="inner description">
-                        Search for products by name.
+                        Search token for product name. If more tokes are sent, the API searches for each token and returns the intersection of the returned list for each search.
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">sorting</td>
+<td>
+
+
+    <div id="d2e199_productSearch_sorting">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description">
+                        The desired sorting of the returned list. The variable can either be _&quot;asc&quot;_ or _&quot;desc&quot;_.
                     </div>
             </div>
         </div>
@@ -3449,22 +1081,22 @@ except ApiException as e:
                             </table>
 
                           <h2>Responses</h2>
-                            <h3> Status: 200 - successful operation </h3>
+                            <h3> Status: 200 - Ok. Successfully returned list of products. The list can be empty </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-searchProduct-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-productSearch-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-searchProduct-200-schema">
-                                  <div id='responses-searchProduct-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-productSearch-200-schema">
+                                  <div id='responses-productSearch-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
-  "description" : "successful operation",
+  "description" : "Ok. Successfully returned list of products. The list can be empty",
   "schema" : {
     "type" : "array",
     "items" : {
@@ -3484,18 +1116,18 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-searchProduct-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-searchProduct-200-schema-200');
+                                        $('#responses-productSearch-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-productSearch-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-searchProduct-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-productSearch-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
-                            <h3> Status: 400 - Missing search query </h3>
+                            <h3> Status: 400 - Bad request. Parameters sent does not have valid values  and/or the wrong data type. </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                             </ul>
@@ -3503,7 +1135,15 @@ except ApiException as e:
                             <div class="tab-content" style='margin-bottom: 10px;'>
                             </div>
 
-                            <h3> Status: 404 - Product not found </h3>
+                            <h3> Status: 401 - Unauthorized </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 500 - Internal Server Error. Could not deliver list of products for some reason </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                             </ul>
@@ -3520,7 +1160,7 @@ except ApiException as e:
             <div id="api-_footer">
               <p>Suggestions, contact, support and error reporting;
                   <div class="app-desc">Information URL: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
-                  <div class="app-desc">Contact Info: <a href="david.stromberg@omegapoint.se">david.stromberg@omegapoint.se</a></div>
+                  <div class="app-desc">Contact Info: <a href="david.stromberg@kronansapotek.se">david.stromberg@kronansapotek.se</a></div>
               </p>
                 <div class="license-info">All rights reserved</div>
                 <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
@@ -3528,7 +1168,7 @@ except ApiException as e:
           </div>
           <div id="generator">
             <div class="content">
-              Generated 2018-05-22T07:40:12.510Z
+              Generated 2018-08-14T07:54:10.156Z
             </div>
           </div>
       </div>
