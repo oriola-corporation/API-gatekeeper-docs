@@ -696,6 +696,19 @@ margin-bottom: 20px;
   <script>
     // Script section to load models into a JS Var
     var defs = {}
+            defs.Order = {
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "string",
+      "description" : "Unique id of the product set by SAP. Is null of order is not yet confirmed by SAP."
+    },
+    "reference" : {
+      "type" : "string",
+      "description" : "Unique id of the product set by API. Is null if the order isn't created through the API"
+    }
+  }
+};
             defs.ProductInfo = {
   "type" : "object",
   "properties" : {
@@ -721,6 +734,10 @@ margin-bottom: 20px;
             -->
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
+                  <li class="nav-header" data-group="Order"><a href="#api-Order">API Methods - Order</a></li>
+                    <li data-group="Order" data-name="orderSearch" class="">
+                      <a href="#api-Order-orderSearch">orderSearch</a>
+                    </li>
                   <li class="nav-header" data-group="Product"><a href="#api-Product">API Methods - Product</a></li>
                     <li data-group="Product" data-name="productSearch" class="">
                       <a href="#api-Product-productSearch">productSearch</a>
@@ -744,6 +761,450 @@ margin-bottom: 20px;
           </div>
         </div>
         <div id="sections">
+                <section id="api-Order">
+                  <h1>Order</h1>
+                    <div id="api-Order-orderSearch">
+                      <article id="api-Order-orderSearch-0" data-group="User" data-name="orderSearch" data-version="0">
+                        <div class="pull-left">
+                          <h1>orderSearch</h1>
+                          <p>Searches orders from a certain supplier and customer. Orders are always sorted by id, descending.</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/order/search</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Order-orderSearch-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Order-orderSearch-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Order-orderSearch-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Order-orderSearch-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Order-orderSearch-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Order-orderSearch-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Order-orderSearch-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Order-orderSearch-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Order-orderSearch-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Order-orderSearch-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Order-orderSearch-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Order-orderSearch-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://tbd.com/v1/api/order/search?page=&pageSize=&supplier=&customer=&unConfirmed="</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Order-orderSearch-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.OrderApi;
+
+import java.io.File;
+import java.util.*;
+
+public class OrderApiExample {
+
+    public static void main(String[] args) {
+        
+        OrderApi apiInstance = new OrderApi();
+        String supplier = supplier_example; // String | The ID of the supplier of the orders.
+        String customer = customer_example; // String | The ID of the customer. The ID cannot be an ID of a customer branch.
+        Integer page = 56; // Integer | The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned.
+        Integer pageSize = 56; // Integer | The maximum number of items returned in the list.
+        Boolean unConfirmed = true; // Boolean | If true, then orders that haven't been confirmed by SAP yet are included. Is set to false if the variable isn't present.
+        try {
+            array[ProductInfo] result = apiInstance.orderSearch(supplier, customer, page, pageSize, unConfirmed);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling OrderApi#orderSearch");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Order-orderSearch-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.OrderApi;
+
+public class OrderApiExample {
+
+    public static void main(String[] args) {
+        OrderApi apiInstance = new OrderApi();
+        String supplier = supplier_example; // String | The ID of the supplier of the orders.
+        String customer = customer_example; // String | The ID of the customer. The ID cannot be an ID of a customer branch.
+        Integer page = 56; // Integer | The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned.
+        Integer pageSize = 56; // Integer | The maximum number of items returned in the list.
+        Boolean unConfirmed = true; // Boolean | If true, then orders that haven't been confirmed by SAP yet are included. Is set to false if the variable isn't present.
+        try {
+            array[ProductInfo] result = apiInstance.orderSearch(supplier, customer, page, pageSize, unConfirmed);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling OrderApi#orderSearch");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Order-orderSearch-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Order-orderSearch-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *supplier = supplier_example; // The ID of the supplier of the orders.
+String *customer = customer_example; // The ID of the customer. The ID cannot be an ID of a customer branch.
+Integer *page = 56; // The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned. (optional)
+Integer *pageSize = 56; // The maximum number of items returned in the list. (optional)
+Boolean *unConfirmed = true; // If true, then orders that haven't been confirmed by SAP yet are included. Is set to false if the variable isn't present. (optional)
+
+OrderApi *apiInstance = [[OrderApi alloc] init];
+
+// Searches orders from a certain supplier and customer. Orders are always sorted by id, descending.
+[apiInstance orderSearchWith:supplier
+    customer:customer
+    page:page
+    pageSize:pageSize
+    unConfirmed:unConfirmed
+              completionHandler: ^(array[ProductInfo] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Order-orderSearch-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var GatekeeperPublicApi = require('gatekeeper_public_api');
+
+var api = new GatekeeperPublicApi.OrderApi()
+
+var supplier = supplier_example; // {String} The ID of the supplier of the orders.
+
+var customer = customer_example; // {String} The ID of the customer. The ID cannot be an ID of a customer branch.
+
+var opts = { 
+  'page': 56, // {Integer} The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned.
+  'pageSize': 56, // {Integer} The maximum number of items returned in the list.
+  'unConfirmed': true // {Boolean} If true, then orders that haven't been confirmed by SAP yet are included. Is set to false if the variable isn't present.
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.orderSearch(supplier, customer, opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Order-orderSearch-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Order-orderSearch-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class orderSearchExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new OrderApi();
+            var supplier = supplier_example;  // String | The ID of the supplier of the orders.
+            var customer = customer_example;  // String | The ID of the customer. The ID cannot be an ID of a customer branch.
+            var page = 56;  // Integer | The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned. (optional) 
+            var pageSize = 56;  // Integer | The maximum number of items returned in the list. (optional) 
+            var unConfirmed = true;  // Boolean | If true, then orders that haven't been confirmed by SAP yet are included. Is set to false if the variable isn't present. (optional) 
+
+            try
+            {
+                // Searches orders from a certain supplier and customer. Orders are always sorted by id, descending.
+                array[ProductInfo] result = apiInstance.orderSearch(supplier, customer, page, pageSize, unConfirmed);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling OrderApi.orderSearch: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Order-orderSearch-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\Api\OrderApi();
+$supplier = supplier_example; // String | The ID of the supplier of the orders.
+$customer = customer_example; // String | The ID of the customer. The ID cannot be an ID of a customer branch.
+$page = 56; // Integer | The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned.
+$pageSize = 56; // Integer | The maximum number of items returned in the list.
+$unConfirmed = true; // Boolean | If true, then orders that haven't been confirmed by SAP yet are included. Is set to false if the variable isn't present.
+
+try {
+    $result = $api_instance->orderSearch($supplier, $customer, $page, $pageSize, $unConfirmed);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OrderApi->orderSearch: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Order-orderSearch-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::OrderApi;
+
+my $api_instance = WWW::SwaggerClient::OrderApi->new();
+my $supplier = supplier_example; # String | The ID of the supplier of the orders.
+my $customer = customer_example; # String | The ID of the customer. The ID cannot be an ID of a customer branch.
+my $page = 56; # Integer | The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned.
+my $pageSize = 56; # Integer | The maximum number of items returned in the list.
+my $unConfirmed = true; # Boolean | If true, then orders that haven't been confirmed by SAP yet are included. Is set to false if the variable isn't present.
+
+eval { 
+    my $result = $api_instance->orderSearch(supplier => $supplier, customer => $customer, page => $page, pageSize => $pageSize, unConfirmed => $unConfirmed);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling OrderApi->orderSearch: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Order-orderSearch-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.OrderApi()
+supplier = supplier_example # String | The ID of the supplier of the orders.
+customer = customer_example # String | The ID of the customer. The ID cannot be an ID of a customer branch.
+page = 56 # Integer | The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned. (optional)
+pageSize = 56 # Integer | The maximum number of items returned in the list. (optional)
+unConfirmed = true # Boolean | If true, then orders that haven't been confirmed by SAP yet are included. Is set to false if the variable isn't present. (optional)
+
+try: 
+    # Searches orders from a certain supplier and customer. Orders are always sorted by id, descending.
+    api_response = api_instance.order_search(supplier, customer, page=page, pageSize=pageSize, unConfirmed=unConfirmed)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling OrderApi->orderSearch: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+                            <div class="methodsubtabletitle">Query parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">page</td>
+<td>
+
+
+    <div id="d2e199_orderSearch_page">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+
+                    <div class="inner description">
+                        The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">pageSize</td>
+<td>
+
+
+    <div id="d2e199_orderSearch_pageSize">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+
+                    <div class="inner description">
+                        The maximum number of items returned in the list.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">supplier*</td>
+<td>
+
+
+    <div id="d2e199_orderSearch_supplier">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description">
+                        The ID of the supplier of the orders.
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">customer*</td>
+<td>
+
+
+    <div id="d2e199_orderSearch_customer">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description">
+                        The ID of the customer. The ID cannot be an ID of a customer branch.
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">unConfirmed</td>
+<td>
+
+
+    <div id="d2e199_orderSearch_unConfirmed">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Boolean
+                </span>
+
+                    <div class="inner description">
+                        If true, then orders that haven&#39;t been confirmed by SAP yet are included. Is set to false if the variable isn&#39;t present.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Ok. Successfully returned list of products. The list can be empty </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-orderSearch-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-orderSearch-200-schema">
+                                  <div id='responses-orderSearch-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Ok. Successfully returned list of products. The list can be empty",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/ProductInfo"
+    }
+  }
+};
+                                        var schema = schemaWrapper.schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-orderSearch-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-orderSearch-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-orderSearch-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 400 - Bad request. Parameters sent does not have valid values  and/or the wrong data type. </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 401 - Unauthorized </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 500 - Internal Server Error. Could not deliver list of products for some reason </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                  </section>
                 <section id="api-Product">
                   <h1>Product</h1>
                     <div id="api-Product-productSearch">
@@ -1168,7 +1629,7 @@ except ApiException as e:
           </div>
           <div id="generator">
             <div class="content">
-              Generated 2018-08-14T07:54:10.156Z
+              Generated 2018-08-17T06:29:52.803Z
             </div>
           </div>
       </div>
