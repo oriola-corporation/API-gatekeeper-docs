@@ -739,6 +739,9 @@ margin-bottom: 20px;
                       <a href="#api-Order-orderSearch">orderSearch</a>
                     </li>
                   <li class="nav-header" data-group="Product"><a href="#api-Product">API Methods - Product</a></li>
+                    <li data-group="Product" data-name="productImage" class="">
+                      <a href="#api-Product-productImage">productImage</a>
+                    </li>
                     <li data-group="Product" data-name="productSearch" class="">
                       <a href="#api-Product-productSearch">productSearch</a>
                     </li>
@@ -1207,6 +1210,318 @@ except ApiException as e:
                   </section>
                 <section id="api-Product">
                   <h1>Product</h1>
+                    <div id="api-Product-productImage">
+                      <article id="api-Product-productImage-0" data-group="User" data-name="productImage" data-version="0">
+                        <div class="pull-left">
+                          <h1>productImage</h1>
+                          <p>Get JPEG image by product ID</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/product/image</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Product-productImage-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Product-productImage-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Product-productImage-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Product-productImage-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Product-productImage-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Product-productImage-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Product-productImage-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Product-productImage-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Product-productImage-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Product-productImage-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Product-productImage-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Product-productImage-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "https://tbd.com/v1/api/product/image"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Product-productImage-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.ProductApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ProductApiExample {
+
+    public static void main(String[] args) {
+        
+        ProductApi apiInstance = new ProductApi();
+        String productId = productId_example; // String | The ID of the product.
+        String accept = accept_example; // String | Must be set to the same type as Content-Type returned by the method.
+        try {
+            apiInstance.productImage(productId, accept);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ProductApi#productImage");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Product-productImage-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.ProductApi;
+
+public class ProductApiExample {
+
+    public static void main(String[] args) {
+        ProductApi apiInstance = new ProductApi();
+        String productId = productId_example; // String | The ID of the product.
+        String accept = accept_example; // String | Must be set to the same type as Content-Type returned by the method.
+        try {
+            apiInstance.productImage(productId, accept);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ProductApi#productImage");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Product-productImage-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Product-productImage-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *productId = productId_example; // The ID of the product.
+String *accept = accept_example; // Must be set to the same type as Content-Type returned by the method.
+
+ProductApi *apiInstance = [[ProductApi alloc] init];
+
+// Get JPEG image by product ID
+[apiInstance productImageWith:productId
+    accept:accept
+              completionHandler: ^(NSError* error) {
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Product-productImage-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var GatekeeperPublicApi = require('gatekeeper_public_api');
+
+var api = new GatekeeperPublicApi.ProductApi()
+
+var productId = productId_example; // {String} The ID of the product.
+
+var accept = accept_example; // {String} Must be set to the same type as Content-Type returned by the method.
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+api.productImage(productId, accept, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Product-productImage-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Product-productImage-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class productImageExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new ProductApi();
+            var productId = productId_example;  // String | The ID of the product.
+            var accept = accept_example;  // String | Must be set to the same type as Content-Type returned by the method.
+
+            try
+            {
+                // Get JPEG image by product ID
+                apiInstance.productImage(productId, accept);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling ProductApi.productImage: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Product-productImage-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\Api\ProductApi();
+$productId = productId_example; // String | The ID of the product.
+$accept = accept_example; // String | Must be set to the same type as Content-Type returned by the method.
+
+try {
+    $api_instance->productImage($productId, $accept);
+} catch (Exception $e) {
+    echo 'Exception when calling ProductApi->productImage: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Product-productImage-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::ProductApi;
+
+my $api_instance = WWW::SwaggerClient::ProductApi->new();
+my $productId = productId_example; # String | The ID of the product.
+my $accept = accept_example; # String | Must be set to the same type as Content-Type returned by the method.
+
+eval { 
+    $api_instance->productImage(productId => $productId, accept => $accept);
+};
+if ($@) {
+    warn "Exception when calling ProductApi->productImage: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Product-productImage-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.ProductApi()
+productId = productId_example # String | The ID of the product.
+accept = accept_example # String | Must be set to the same type as Content-Type returned by the method.
+
+try: 
+    # Get JPEG image by product ID
+    api_instance.product_image(productId, accept)
+except ApiException as e:
+    print("Exception when calling ProductApi->productImage: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">productId*</td>
+<td>
+
+
+    <div id="d2e199_productImage_productId">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description">
+                        The ID of the product.
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+                            <div class="methodsubtabletitle">Header parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                  <tr><td style="width:150px;">Accept*</td>
+<td>
+
+
+    <div id="d2e199_productImage_accept">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description">
+                        Must be set to the same type as Content-Type returned by the method.
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Ok. Successfully returned an image. </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 400 - Bad request. Parameters sent does not have valid values and/or the wrong data type. </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 401 - Unauthorized </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 500 - Internal Server Error. Could not deliver image for some reason </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-Product-productSearch">
                       <article id="api-Product-productSearch-0" data-group="User" data-name="productSearch" data-version="0">
                         <div class="pull-left">
@@ -1629,7 +1944,7 @@ except ApiException as e:
           </div>
           <div id="generator">
             <div class="content">
-              Generated 2018-08-17T06:29:52.803Z
+              Generated 2018-09-10T07:44:32.651Z
             </div>
           </div>
       </div>

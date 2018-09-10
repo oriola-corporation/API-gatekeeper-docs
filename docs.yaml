@@ -1,0 +1,149 @@
+swagger: "2.0"
+info:
+  description: "Gatekeeper Public API"
+  version: "0.0.1"
+  title: "Gatekeeper Public API"
+  contact:
+    email: "david.stromberg@kronansapotek.se"
+host: "tbd.com"
+basePath: "/v1/api"
+tags:
+- name: "Product"
+  description: "Everything about products"
+- name: "Order"
+  description: "Everything about orders"  
+schemes:
+- "https"
+paths:
+
+  /product/search:
+    get:
+      operationId: "productSearch"
+      tags:
+      - "Product"
+      summary: "Searches products"
+      parameters:
+        - in: query
+          name: page
+          type: integer
+          required: false
+          description: The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned. 
+        - in: query
+          name: pageSize
+          type: integer
+          required: false
+          description: The maximum number of items returned in the list.
+        - in: query
+          name: name
+          type: string
+          required: true
+          description: Search token for product name. If more tokes are sent, the API searches for each token and returns the intersection of the returned list for each search.
+        - in: query
+          name: sorting
+          type: string
+          required: false
+          description: The desired sorting of the returned list. The variable can either be _"asc"_ or _"desc"_. 
+      responses:  
+        200:
+          description: "Ok. Successfully returned list of products. The list can be empty"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/ProductInfo"
+        400:
+          description: "Bad request. Parameters sent does not have valid values  and/or the wrong data type."              
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Internal Server Error. Could not deliver list of products for some reason"
+  /product/image:
+    get:
+      operationId: "productImage"
+      tags:
+      - "Product"
+      summary: "Get JPEG image by product ID"
+      produces:
+      - "image/jpeg"
+      parameters: 
+        - in: path
+          name: productId
+          type: string
+          required: true
+          description: The ID of the product.  
+        - name: "Accept"
+          in: "header"
+          required: true
+          type: "string" 
+          description: "Must be set to the same type as Content-Type returned by the method."
+      responses:  
+        200:
+          description: "Ok. Successfully returned an image."
+        400:
+          description: "Bad request. Parameters sent does not have valid values and/or the wrong data type."              
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Internal Server Error. Could not deliver image for some reason"        
+  /order/search:
+    get:
+      operationId: "orderSearch"
+      tags:
+      - "Order"
+      summary: "Searches orders from a certain supplier and customer. Orders are always sorted by id, descending."
+      parameters:
+        - in: query
+          name: page
+          type: integer
+          required: false
+          description: The desired page, starting with 1. If the desired page is _p_ and _p * pageSize_ is greater than the number of items returned by the search, an empty list will be returned. 
+        - in: query
+          name: pageSize
+          type: integer
+          required: false
+          description: The maximum number of items returned in the list.
+        - in: query
+          name: supplier
+          type: string
+          required: true
+          description: The ID of the supplier of the orders.
+        - in: query
+          name: customer
+          type: string
+          required: true
+          description: The ID of the customer. The ID cannot be an ID of a customer branch.
+        - in: query
+          name: unConfirmed
+          type: boolean
+          required: false
+          description: "If true, then orders that haven't been confirmed by SAP yet are included. Is set to false if the variable isn't present."
+      
+      responses:  
+        200:
+          description: "Ok. Successfully returned list of products. The list can be empty"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/ProductInfo"
+        400:
+          description: "Bad request. Parameters sent does not have valid values  and/or the wrong data type."              
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Internal Server Error. Could not deliver list of products for some reason"
+    
+definitions:
+  ProductInfo:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        description: "Unique id of the product"
+  Order:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        description: "Unique id of the product set by SAP. Is null of order is not yet confirmed by SAP."
+      reference:
+        type: "string"
+        description: "Unique id of the product set by API. Is null if the order isn't created through the API"
